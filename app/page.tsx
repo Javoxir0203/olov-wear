@@ -13,6 +13,7 @@ const Home = () => {
       <ProductHero/>
       <CollectionsGrid/>
       <CategoryGrid/>
+      <div></div>
     </div>
   )
 }
