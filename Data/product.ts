@@ -1,12 +1,4 @@
 import { Product } from '@/types/product'
-import vision from '@/public/images/herosection/vision.png'
-import vision1 from '@/public/images/herosection/Street_.png'
-import vision2 from '@/public/images/herosection/Street_.png'
-import vision3 from '@/public/images/herosection/vision.png'
-import vision4 from '@/public/images/herosection/Street_.png'
-import vision5 from '@/public/images/herosection/samurai.png'
-import vision6 from '@/public/images/herosection/Street_.png'
-import vision7 from '@/public/images/herosection/smilw c.png'
 
 export const products: Product[] = [
 	{
@@ -16,7 +8,7 @@ export const products: Product[] = [
 		category: 'Fitness',
 		price: 30,
 		originalPrice:75,
-		image: vision,
+		image: '/images/herosection/vision.png',
 		isNew: true,
 	},
 	{
@@ -26,7 +18,7 @@ export const products: Product[] = [
 		category: 'Fitness',
 		price: 30,
 		originalPrice:80,
-		image: vision1,
+		image: '/images/herosection/orqa sam.png',
 		isNew: true,
 	},
 	{
@@ -36,7 +28,7 @@ export const products: Product[] = [
 		category: 'Winter',
 		price: 30,
 		originalPrice:85,
-		image: vision2,
+		image: '/images/herosection/samurai.png',
 		isNew: true,
 	},
 	{
@@ -46,7 +38,7 @@ export const products: Product[] = [
 		category: 'Cycling',
 		price: 30,
 		originalPrice: 90,
-		image: vision3,
+		image: '/images/herosection/smilw c.png',
 		isNew: true,
 	},
 	{
@@ -56,7 +48,7 @@ export const products: Product[] = [
 		category: 'Winter',
 		price: 35,
 		originalPrice: 100,
-		image: vision4,
+		image: '/images/herosection/street music front_.png',
 		isNew: true,
 	},
 	{
@@ -66,7 +58,7 @@ export const products: Product[] = [
 		category: 'Fitness',
 		price: 35,
 		originalPrice: 109,
-		image: vision5,
+		image: '/images/herosection/Street woman_.png',
 		isNew:true,
 	},
 	{
@@ -76,7 +68,7 @@ export const products: Product[] = [
 		category: 'Fitness',
 		price: 35,
 		originalPrice: 110,
-		image: vision6,
+		image: '/images/herosection/Street_.png',
 		isNew: true,
 	},
 	{
@@ -86,7 +78,7 @@ export const products: Product[] = [
 		category: 'Winter',
 		price: 35,
 		originalPrice: 120,
-		image: vision7,
+		image: '/images/herosection/Street_.png',
 		isNew: true,
 	},
 ]

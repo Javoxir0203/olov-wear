@@ -12,3 +12,5 @@ export interface Product {
 }
 
 export type Category = 'SHOW ALL' | 'FITNESS' | 'CYCLING' | 'WINTER'
+
+

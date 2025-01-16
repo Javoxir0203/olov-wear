@@ -1,8 +1,8 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
 
@@ -21,7 +21,7 @@ export function ContactModal({ isOpen, onClose, productName }: ContactModalProps
 		e.preventDefault()
 		// Handle form submission here
 		console.log({ lastName, firstName, phone, productName })
-		onClose()
+		onClose() // Close the modal after submitting
 	}
 
 	return (
@@ -33,19 +33,24 @@ export function ContactModal({ isOpen, onClose, productName }: ContactModalProps
 				<form onSubmit={handleSubmit} className='grid gap-4 py-4'>
 					<div className='grid gap-2'>
 						<Label htmlFor='lastName'>Last Name</Label>
-						<Input id='lastName' type='text' value={lastName} onChange={e => setLastName(e.target.value)} required placeholder='Enter your Last name' />
+						<Input id='lastName' type='text' value={lastName} onChange={e => setLastName(e.target.value)} required placeholder='Enter your last name' />
 					</div>
 					<div className='grid gap-2'>
 						<Label htmlFor='firstName'>First Name</Label>
-						<Input id='firstName' type='text' value={firstName} onChange={e => setFirstName(e.target.value)} required placeholder='Enter your First name' />
+						<Input id='firstName' type='text' value={firstName} onChange={e => setFirstName(e.target.value)} required placeholder='Enter your first name' />
 					</div>
 					<div className='grid gap-2'>
 						<Label htmlFor='phone'>Phone Number</Label>
 						<Input id='phone' type='tel' value={phone} onChange={e => setPhone(e.target.value)} required placeholder='Enter your phone number' />
 					</div>
-					<Button type='submit' className='w-full mt-4'>
-						Submit
-					</Button>
+					<div className='flex justify-end space-x-3'>
+						<Button type='button' onClick={onClose} className='bg-gray-300 text-gray-700 hover:bg-gray-400'>
+							Cancel
+						</Button>
+						<Button type='submit' className='bg-blue-600 text-white hover:bg-blue-700'>
+							Submit
+						</Button>
+					</div>
 				</form>
 			</DialogContent>
 		</Dialog>

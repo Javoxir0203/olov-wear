@@ -4,7 +4,7 @@ import Image from 'next/image'
 import person from '@/public/images/homesection/main-home-brand-6.jpg'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { AlignJustify, CircleUserRound, Heart, Search } from 'lucide-react'
+import { AlignJustify, CircleUserRound, Heart, Search, X } from 'lucide-react'
 
 const HeroSection = () => {
 	const [menuOpen, setMenuOpen] = useState(false)
@@ -23,36 +23,40 @@ const HeroSection = () => {
 				<div className='absolute top-0 left-0 w-full px-4 sm:px-6 lg:px-12 py-4 flex justify-between items-center bg-transparent'>
 					<div className='flex items-center space-x-4'>
 						{/* Icon + Brand Name */}
-						<AlignJustify onClick={() => setMenuOpen(!menuOpen)} className='text-white text-2xl cursor-pointer lg:hidden' aria-label='Toggle menu' />
-						<h1 className='text-white text-2xl font-bold'>Olov-wear</h1>
+						<AlignJustify onClick={() => setMenuOpen(true)} className='text-white text-2xl cursor-pointer ' aria-label='Toggle menu' />
+						<h1 className='text-white text-2xl  font-bold'>Olov-wear</h1>
 					</div>
 					<nav className='hidden lg:flex space-x-6 text-white'>
-						<Link href='/' className='hover:text-gray-200 text-base md:text-lg'>
+						<Link href='/' className='hover:text-gray-200 font-bold text-4xl md:text-2xl'>
 							Home
 						</Link>
-						<Link href='/products' className='hover:text-gray-200 text-base md:text-lg'>
+						<Link href='/products' className='hover:text-gray-200 font-bold text-4xl md:text-2xl'>
 							Products
 						</Link>
 					</nav>
 					<div className='flex space-x-4 text-white'>
-						<Search className='text-2xl cursor-pointer' />
-						<CircleUserRound className='text-2xl cursor-pointer' />
-						<Heart className='text-2xl cursor-pointer' />
+						<Search className='text-2xl w-10 h-6 cursor-pointer' />
+						<CircleUserRound className='text-2xl w-10 h-6 cursor-pointer' />
+						<Heart className='text-2xl w-10 h-6 cursor-pointer' />
 					</div>
 				</div>
 
 				{/* Dropdown menu for mobile */}
 				{menuOpen && (
-					<div className='absolute top-16 left-4 right-4 bg-white text-black rounded shadow-lg lg:hidden'>
-						<Link href='/' className='block px-4 py-2 hover:bg-gray-200'>
-							Home
-						</Link>
-						<Link href='/products' className='block px-4 py-2 hover:bg-gray-200'>
-							Products
-						</Link>
-						<Link href='/product-detail' className='block px-4 py-2 hover:bg-gray-200'>
-							Product Detail
-						</Link>
+					<div className='absolute inset-y-0 left-0 bg-white text-black w-3/4 max-w-xs shadow-lg z-50 p-4 lg:hidden'>
+						<div className='flex justify-between items-center mb-4'>
+							<h2 className='font-bold text-lg'>Menu</h2>
+							<X onClick={() => setMenuOpen(false)} className='text-2xl cursor-pointer' aria-label='Close menu' />
+						</div>
+						<div className='space-y-2'>
+							<Link href='/' className='block px-4 py-2 hover:bg-gray-200' >
+								Home
+							</Link>
+							<Link href='/products' className='block px-4 py-2 hover:bg-gray-200'>
+								Products
+							</Link>
+
+						</div>
 					</div>
 				)}
 

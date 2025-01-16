@@ -1,18 +1,18 @@
 import React from 'react'
-import HeroSection from './components/herosection'
-import HomeSection from './components/homesection'
-import ProductHero from './components/producthero'
-import CollectionsGrid from './components/collectionsgrid'
-import CategoryGrid from './components/categorygrid'
-import Section from './components/section'
-import LogoShowcase from './components/logoshowcase'
-import TrendingNow from './components/trendingnow'
-import StreetSection from './components/streetsection'
-import Footer from './components/footer'
-import { ProductGrid } from './components/product.grid'
+import HeroSection from './_components/herosection'
+import HomeSection from './_components/homesection'
+import ProductHero from './_components/producthero'
+import CollectionsGrid from './_components/collectionsgrid'
+import CategoryGrid from './_components/categorygrid'
+import Section from './_components/section'
+import LogoShowcase from './_components/logoshowcase'
+import StreetSection from './_components/streetsection'
+import Footer from './_components/footer'
+import TrendingProducts from './_components/trendingnow'
+import { ProductGrid } from './_components/product.grid'
 
 const Home = () => {
-  return (
+	return (
 		<div>
 			<HeroSection />
 			<HomeSection />
@@ -22,7 +22,7 @@ const Home = () => {
 			<CategoryGrid />
 			<Section />
 			<LogoShowcase />
-			<TrendingNow />
+			<TrendingProducts />
 			<StreetSection />
 			<Footer />
 		</div>
