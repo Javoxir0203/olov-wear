@@ -37,7 +37,7 @@ const products = [
 		price: 30,
 		originalPrice: 90,
 		image: vision2,
-		label: 'new',
+		label: 'New',
 	},
 	{
 		id: 4,
