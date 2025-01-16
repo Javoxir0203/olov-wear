@@ -13,13 +13,14 @@ interface ContactModalProps {
 }
 
 export function ContactModal({ isOpen, onClose, productName }: ContactModalProps) {
-	const [email, setEmail] = useState('')
+	const [lastName, setLastName] = useState('')
+	const [firstName, setFirstName] = useState('')
 	const [phone, setPhone] = useState('')
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 		// Handle form submission here
-		console.log({ email, phone, productName })
+		console.log({ lastName, firstName, phone, productName })
 		onClose()
 	}
 
@@ -31,8 +32,12 @@ export function ContactModal({ isOpen, onClose, productName }: ContactModalProps
 				</DialogHeader>
 				<form onSubmit={handleSubmit} className='grid gap-4 py-4'>
 					<div className='grid gap-2'>
-						<Label htmlFor='email'>Email</Label>
-						<Input id='email' type='email' value={email} onChange={e => setEmail(e.target.value)} required placeholder='Enter your email' />
+						<Label htmlFor='lastName'>Last Name</Label>
+						<Input id='lastName' type='text' value={lastName} onChange={e => setLastName(e.target.value)} required placeholder='Enter your Last name' />
+					</div>
+					<div className='grid gap-2'>
+						<Label htmlFor='firstName'>First Name</Label>
+						<Input id='firstName' type='text' value={firstName} onChange={e => setFirstName(e.target.value)} required placeholder='Enter your First name' />
 					</div>
 					<div className='grid gap-2'>
 						<Label htmlFor='phone'>Phone Number</Label>
