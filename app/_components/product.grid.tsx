@@ -57,7 +57,7 @@ export function ProductGrid() {
 							<p className='text-sm text-gray-500'>{product.brand}</p>
 							<h3 className='font-semibold'>{product.name}</h3>
 							<p className='text-sm text-gray-500'>{product.category}</p>
-							<div className='flex items-center gap-24'>
+							<div className='flex items-center gap-24 md:gap-20'>
 								<div className='flex items-center gap-2'>
 									<span className='font-bold'>${product.price}</span>
 									{product.originalPrice && <span className='text-sm text-gray-400 line-through'>${product.originalPrice}</span>}

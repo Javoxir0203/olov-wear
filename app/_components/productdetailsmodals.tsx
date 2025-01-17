@@ -17,7 +17,7 @@ export function ProductDetails({ product, isOpen, onClose, onBuy }: ProductDetai
 
 	return (
 		<Dialog open={isOpen} onOpenChange={onClose}>
-			<DialogContent className='sm:max-w-[600px]'>
+			<DialogContent className='sm:max-w-[400px]'>
 				<div className='grid gap-4'>
 					<div className='aspect-square overflow-hidden rounded-lg'>
 						<Image src={product.image } width={200} height={200} alt={product.name} className='object-cover w-full h-full' />

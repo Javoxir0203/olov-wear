@@ -118,7 +118,7 @@ const TrendingProducts = () => {
 						<div className='mt-2 space-y-1 ml-3  mb-5'>
 							<p className='text-sm text-gray-500'>{product.brand}</p>
 							<h3 className='font-medium'>{product.name}</h3>
-							<div className='flex items-center gap-44'>
+							<div className='flex items-center gap-44 md:gap-40'>
 								<p className='font-bold'>${product.price}</p>
 								<Button variant='secondary' className='w-20 bg-[#EF600D] hover:bg-[#EF600D]' onClick={() => handleProductClick(product)}>
 									Buy
