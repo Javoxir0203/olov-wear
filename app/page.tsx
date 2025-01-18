@@ -10,6 +10,7 @@ import StreetSection from './_components/streetsection'
 import Footer from './_components/footer'
 import TrendingProducts from './_components/trendingnow'
 import { ProductGrid } from './_components/product.grid'
+import Crud from './_components/crud'
 
 const Home = () => {
 	return (
@@ -24,6 +25,9 @@ const Home = () => {
 			<LogoShowcase />
 			<TrendingProducts />
 			<StreetSection />
+
+			<Crud />
+
 			<Footer />
 		</div>
 	)

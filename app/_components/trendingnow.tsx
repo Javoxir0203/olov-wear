@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { Heart } from 'lucide-react'
 import { Product } from '@/types/products'
 import { ProductDetails } from './productdetailsmodals'
-import { ContactModals } from './contactmodals'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { ContactModals } from './contactmodals'
 
 const initialProducts: Product[] = [
 	{
@@ -64,7 +64,12 @@ const initialProducts: Product[] = [
 	},
 ]
 
+
+
+
 const TrendingProducts = () => {
+
+
 	const [products, setProducts] = useState(initialProducts)
 	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false)
@@ -127,6 +132,7 @@ const TrendingProducts = () => {
 						</div>
 					</div>
 				))}
+
 			</div>
 
 			<ProductDetails product={selectedProduct} isOpen={isDetailsOpen} onClose={() => setIsDetailsOpen(false)} onBuy={handleBuyClick} />

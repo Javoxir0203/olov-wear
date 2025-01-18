@@ -3,6 +3,7 @@ import { ProductGrid } from '../_components/product.grid'
 import TrendingProducts from '../_components/trendingnow'
 import Footer from '../_components/footer'
 import CategoryGrid from '../_components/categorygrid'
+import Crud from '../_components/crud'
 
 const Products = () => {
 	return (
@@ -10,6 +11,7 @@ const Products = () => {
             <CategoryGrid/>
 			<ProductGrid />
 			<TrendingProducts />
+			<Crud/>
             <Footer />
 		</div>
 	)
