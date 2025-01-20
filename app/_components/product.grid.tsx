@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { products } from '@/Data/product'
 import { Product } from '@/types/product'
 import { ProductDetailsModal } from './product.detalis.modal'
-import ContactPage from './contactmodals'
+import ContactPages from './contact.modal'
 
 export function ProductGrid() {
 	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
@@ -73,7 +73,7 @@ export function ProductGrid() {
 
 			{/* Modals */}
 			<ProductDetailsModal product={selectedProduct} isOpen={!!selectedProduct && !showContactModal} onClose={() => setSelectedProduct(null)} onBuy={() => setShowContactModal(true)} />
-			{showContactModal && selectedProduct && <ContactPage productName={selectedProduct.name} onClose={() => setShowContactModal(false)} />}
+			{showContactModal && selectedProduct && <ContactPages productName={selectedProduct.name} onClose={() => setShowContactModal(false)} />}
 		</div>
 	)
 }
