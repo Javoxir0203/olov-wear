@@ -29,6 +29,11 @@ export function ProductGrid() {
 		})
 	}
 
+	const handleBuy = () => {
+		setShowContactModal(true)
+		setSelectedProduct(null) // Ensures Product Details Modal is closed
+	}
+
 	return (
 		<div className='max-w-7xl mx-auto mt-20 mb-10 px-4 sm:px-6 lg:px-20'>
 			<h1 className='text-3xl font-bold text-center mb-8'>FEATURED PRODUCTS</h1>
@@ -72,8 +77,8 @@ export function ProductGrid() {
 			</div>
 
 			{/* Modals */}
-			<ProductDetailsModal product={selectedProduct} isOpen={!!selectedProduct && !showContactModal} onClose={() => setSelectedProduct(null)} onBuy={() => setShowContactModal(true)} />
-			{showContactModal && selectedProduct && <ContactPages productName={selectedProduct.name} onClose={() => setShowContactModal(false)} />}
+			<ProductDetailsModal product={selectedProduct} isOpen={!!selectedProduct && !showContactModal} onClose={() => setSelectedProduct(null)} onBuy={handleBuy} />
+			{showContactModal && <ContactPages productName={selectedProduct?.name || ''} onClose={() => setShowContactModal(false)} />}
 		</div>
 	)
 }

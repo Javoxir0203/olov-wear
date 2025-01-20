@@ -48,8 +48,6 @@ const ContactPage: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 				throw new Error('Failed to submit the order.')
 			}
 
-			// Muvaffaqiyat xabari
-			alert('Your order has been successfully submitted!')
 
 			// Inputlarni tozalash
 			if (fullNameRef.current) fullNameRef.current.value = ''

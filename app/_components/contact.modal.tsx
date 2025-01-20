@@ -34,6 +34,7 @@ const ContactPages: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 			}
 
 			// Ma'lumotlarni API'ga yuborish
+			console.log('Submitting order with:', { userFullName, userPhoneNumber, productName })
 			const response = await fetch('http://45.92.173.46:5050/api/Orders/CreateOrder', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -48,17 +49,16 @@ const ContactPages: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 				throw new Error('Failed to submit the order.')
 			}
 
-			// Muvaffaqiyat xabari
-			alert('Your order has been successfully submitted!')
-
 			// Inputlarni tozalash
+			console.log('Order submitted successfully.')
 			if (fullNameRef.current) fullNameRef.current.value = ''
 			if (phoneNumberRef.current) phoneNumberRef.current.value = ''
 
 			// Modalni yopish
 			onClose()
 
-			// Router orqali bosh sahifaga yo'naltirish
+			// Router orqali ma'lum sahifaga yo'naltirish
+			console.log('Redirecting to homepage...')
 			router.push('/')
 		} catch (error) {
 			console.error('Error submitting order:', error)
