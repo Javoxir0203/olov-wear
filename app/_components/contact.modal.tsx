@@ -1,58 +1,92 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { useRouter } from 'next/navigation'
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { useState, useRef } from 'react'
 
-interface ContactModalProps {
-	isOpen: boolean
-	onClose: () => void
+interface ContactPageProps {
 	productName: string
+	onClose: () => void
 }
 
-export function ContactModal({ isOpen, onClose, productName }: ContactModalProps) {
-	const [lastName, setLastName] = useState('')
-	const [firstName, setFirstName] = useState('')
-	const [phone, setPhone] = useState('')
+const ContactPage: React.FC<ContactPageProps> = ({ productName, onClose }) => {
+	const router = useRouter()
+	const [isSubmitting, setIsSubmitting] = useState(false)
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault()
-		// Handle form submission here
-		console.log({ lastName, firstName, phone, productName })
-		onClose() // Close the modal after submitting
+	// Inputlarni boshqarish uchun ref
+	const fullNameRef = useRef<HTMLInputElement>(null)
+	const phoneNumberRef = useRef<HTMLInputElement>(null)
+
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault()
+		setIsSubmitting(true)
+
+		try {
+			// Input ma'lumotlarini olish
+			const userFullName = fullNameRef.current?.value || ''
+			const userPhoneNumber = phoneNumberRef.current?.value || ''
+
+			// Ma'lumotlarni konsolga chiqarish
+			console.log({
+				UserFullName: userFullName,
+				UserPhoneNumber: userPhoneNumber,
+				ProductKey: productName,
+			})
+
+			// API'ga ma'lumotlarni yuborish
+			const response = await fetch('http://45.92.173.46:5050/api/Orders/CreateOrder', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					UserFullName: userFullName,
+					UserPhoneNumber: userPhoneNumber,
+					ProductKey: productName,
+				}),
+			})
+
+			if (!response.ok) {
+				throw new Error('Failed to submit the order.')
+			}
+
+			// Inputlarni tozalash
+			if (fullNameRef.current) fullNameRef.current.value = ''
+			if (phoneNumberRef.current) phoneNumberRef.current.value = ''
+
+			// Router orqali bosh sahifaga yo'naltirish
+			router.push('/')
+		} catch (error) {
+			console.error('Error submitting order:', error)
+			alert('Failed to submit order. Please try again.')
+		} finally {
+			setIsSubmitting(false)
+		}
 	}
 
 	return (
-		<Dialog open={isOpen} onOpenChange={onClose}>
-			<DialogContent className='sm:max-w-[425px]'>
+		<Dialog open onOpenChange={onClose}>
+			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Complete Your Purchase</DialogTitle>
+					<h2 className='text-xl font-bold'>Order for {productName}</h2>
 				</DialogHeader>
-				<form onSubmit={handleSubmit} className='grid gap-4 py-4'>
-					<div className='grid gap-2'>
-						<Label htmlFor='lastName'>Last Name</Label>
-						<Input id='lastName' type='text' value={lastName} onChange={e => setLastName(e.target.value)} required placeholder='Enter your last name' />
+				<form onSubmit={handleSubmit} className='space-y-4'>
+					<div className='space-y-2'>
+						<Label htmlFor='userFullName'>Full Name</Label>
+						<Input id='userFullName' name='userFullName' type='text' placeholder='Your Full Name' required ref={fullNameRef} />
 					</div>
-					<div className='grid gap-2'>
-						<Label htmlFor='firstName'>First Name</Label>
-						<Input id='firstName' type='text' value={firstName} onChange={e => setFirstName(e.target.value)} required placeholder='Enter your first name' />
+					<div className='space-y-2'>
+						<Label htmlFor='userPhoneNumber'>Phone Number</Label>
+						<Input id='userPhoneNumber' name='userPhoneNumber' type='text' placeholder='Your Phone Number' required ref={phoneNumberRef} />
 					</div>
-					<div className='grid gap-2'>
-						<Label htmlFor='phone'>Phone Number</Label>
-						<Input id='phone' type='tel' value={phone} onChange={e => setPhone(e.target.value)} required placeholder='Enter your phone number' />
-					</div>
-					<div className='flex justify-end space-x-3'>
-						<Button type='button' onClick={onClose} className='bg-gray-300 text-gray-700 hover:bg-gray-400'>
-							Cancel
-						</Button>
-						<Button type='submit' className='bg-blue-600 text-white hover:bg-blue-700'>
-							Submit
-						</Button>
-					</div>
+					<Button type='submit' disabled={isSubmitting}>
+						{isSubmitting ? 'Submitting...' : 'Submit Order'}
+					</Button>
 				</form>
 			</DialogContent>
 		</Dialog>
 	)
 }
+
+export default ContactPage

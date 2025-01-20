@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { products } from '@/Data/product'
 import { Product } from '@/types/product'
 import { ProductDetailsModal } from './product.detalis.modal'
-import { ContactModal } from './contact.modal'
+import ContactPage from './contactmodals'
 
 export function ProductGrid() {
 	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
@@ -34,7 +34,7 @@ export function ProductGrid() {
 			<h1 className='text-3xl font-bold text-center mb-8'>FEATURED PRODUCTS</h1>
 
 			{/* Filter Section */}
-			<div className='flex flex-wrap  gap-2 mb-8'>
+			<div className='flex flex-wrap gap-2 mb-8'>
 				{['SHOW ALL', 'FITNESS', 'CYCLING', 'WINTER'].map(filter => (
 					<Button key={filter} variant={activeFilter === filter ? 'default' : 'ghost'} onClick={() => setActiveFilter(filter)} className='text-sm md:text-base px-4 py-2'>
 						{filter}
@@ -73,14 +73,7 @@ export function ProductGrid() {
 
 			{/* Modals */}
 			<ProductDetailsModal product={selectedProduct} isOpen={!!selectedProduct && !showContactModal} onClose={() => setSelectedProduct(null)} onBuy={() => setShowContactModal(true)} />
-			<ContactModal
-				isOpen={showContactModal}
-				onClose={() => {
-					setShowContactModal(false)
-					setSelectedProduct(null)
-				}}
-				productName={selectedProduct?.name || ''}
-			/>
+			{showContactModal && selectedProduct && <ContactPage productName={selectedProduct.name} onClose={() => setShowContactModal(false)} />}
 		</div>
 	)
 }
