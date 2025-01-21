@@ -18,6 +18,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 	// Inputlarni boshqarish uchun ref
 	const fullNameRef = useRef<HTMLInputElement>(null)
 	const phoneNumberRef = useRef<HTMLInputElement>(null)
+	console.log(123)
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
@@ -44,10 +45,11 @@ const ContactPage: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 				}),
 			})
 
+			console.log(response)
+
 			if (!response.ok) {
 				throw new Error('Failed to submit the order.')
 			}
-
 
 			// Inputlarni tozalash
 			if (fullNameRef.current) fullNameRef.current.value = ''
@@ -61,6 +63,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 		} catch (error) {
 			console.error('Error submitting order:', error)
 			alert('Failed to submit order. Please try again.')
+		} finally {
+			onClose()
 		}
 	}
 

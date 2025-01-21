@@ -10,12 +10,12 @@ import { useRef } from 'react'
 interface ContactPageProps {
 	productName: string
 	onClose: () => void
+	onCloseDetail: () => void
 }
 
-const ContactPages: React.FC<ContactPageProps> = ({ productName, onClose }) => {
+const ContactPages: React.FC<ContactPageProps> = ({ productName, onClose, onCloseDetail }) => {
 	const router = useRouter()
 
-	// Inputlarni boshqarish uchun ref
 	const fullNameRef = useRef<HTMLInputElement>(null)
 	const phoneNumberRef = useRef<HTMLInputElement>(null)
 
@@ -49,7 +49,7 @@ const ContactPages: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 					ProductKey: productName,
 				}),
 			})
-
+			console.log(response)
 			if (!response.ok) {
 				const errorData = await response.json()
 				console.error('API Error:', errorData)
@@ -71,6 +71,9 @@ const ContactPages: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 		} catch (error) {
 			console.error('Error submitting order:', error)
 			alert('Failed to submit order. Please try again.')
+		} finally {
+			onClose()
+			onCloseDetail()
 		}
 	}
 

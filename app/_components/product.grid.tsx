@@ -70,7 +70,7 @@ export function ProductGrid() {
 									{product.originalPrice && <span className='text-sm text-gray-400 line-through'>${product.originalPrice}</span>}
 								</div>
 								<Button variant='outline' className='w-20 bg-[#EF600D] hover:bg-[#EF600D]' size='sm' onClick={() => setSelectedProduct(product)} disabled={product.isSoldOut}>
-								Buy
+									Buy
 								</Button>
 							</div>
 						</div>
@@ -80,9 +80,7 @@ export function ProductGrid() {
 
 			{/* Modals */}
 			<ProductDetailsModal product={selectedProduct} isOpen={!!selectedProduct && !showContactModal} onClose={() => setSelectedProduct(null)} onBuy={handleBuy} />
-			{showContactModal && selectedProduct && (
-				<ContactPages productName={selectedProduct.name} onClose={() => setShowContactModal(false)} />
-			)}
+			{showContactModal && selectedProduct && <ContactPages productName={selectedProduct.name} onClose={() => setShowContactModal(false)} onCloseDetail={() => setSelectedProduct(null)} />}
 		</div>
 	)
 }
