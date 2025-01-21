@@ -1,3 +1,4 @@
+// ProductGrid.jsx
 'use client'
 
 import { useState } from 'react'
@@ -6,8 +7,8 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { products } from '@/Data/product'
 import { Product } from '@/types/product'
-import { ProductDetailsModal } from './product.detalis.modal'
 import ContactPages from './contact.modal'
+import { ProductDetailsModal } from './product.detalis.modal'
 
 export function ProductGrid() {
 	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
@@ -29,9 +30,9 @@ export function ProductGrid() {
 		})
 	}
 
-	const handleBuy = () => {
+	const handleBuy = (product: Product) => {
+		setSelectedProduct(product)
 		setShowContactModal(true)
-		setSelectedProduct(null) // Ensures Product Details Modal is closed
 	}
 
 	return (
@@ -49,8 +50,8 @@ export function ProductGrid() {
 
 			{/* Product Grid */}
 			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-				{filteredProducts.map((product, index) => (
-					<div key={index} className='group relative border rounded-lg overflow-hidden'>
+				{filteredProducts.map(product => (
+					<div key={product.id} className='group relative border rounded-lg overflow-hidden'>
 						<div className='relative aspect-square mb-3'>
 							<Image src={product.image} alt={product.name} fill className='object-cover rounded-lg' />
 							<Button variant='ghost' size='icon' className={`absolute top-2 right-2 transition-opacity ${likedProducts.has(product.id) ? 'text-red-500' : ''}`} onClick={() => toggleLike(product.id)}>
@@ -67,7 +68,7 @@ export function ProductGrid() {
 									<span className='font-bold'>${product.price}</span>
 									{product.originalPrice && <span className='text-sm text-gray-400 line-through'>${product.originalPrice}</span>}
 								</div>
-								<Button variant='outline' className='w-20 bg-[#EF600D] hover:bg-[#EF600D]' size='sm' onClick={() => setSelectedProduct(product)} disabled={product.isSoldOut}>
+								<Button variant='outline' className='w-20 bg-[#EF600D] hover:bg-[#EF600D]' size='sm' onClick={() => handleBuy(product)} disabled={product.isSoldOut}>
 									Buy
 								</Button>
 							</div>
@@ -77,8 +78,18 @@ export function ProductGrid() {
 			</div>
 
 			{/* Modals */}
-			<ProductDetailsModal product={selectedProduct} isOpen={!!selectedProduct && !showContactModal} onClose={() => setSelectedProduct(null)} onBuy={handleBuy} />
-			{showContactModal && <ContactPages productName={selectedProduct?.name || ''} onClose={() => setShowContactModal(false)} />}
+			<ProductDetailsModal product={selectedProduct} isOpen={!!selectedProduct && !showContactModal} onClose={() => setSelectedProduct(null)} onBuy={() => setShowContactModal(true)} />
+			{showContactModal && selectedProduct && (
+				<ContactPages
+					productName={selectedProduct.name}
+					onClose={() => {
+						setShowContactModal(false)
+						setSelectedProduct(null)
+					}}
+				/>
+			)}
 		</div>
 	)
 }
+
+export default ProductGrid
