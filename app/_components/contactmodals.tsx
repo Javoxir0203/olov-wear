@@ -1,5 +1,5 @@
 'use client'
-
+const apiUrl: string = process.env.NEXT_PUBLIC_API_URL as string;
 import { useRouter } from 'next/navigation'
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
@@ -35,7 +35,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ productName, onClose }) => {
 			}
 
 			// Ma'lumotlarni API'ga yuborish
-			const response = await fetch('http://45.92.173.46:5050/api/Orders/CreateOrder', {
+			const response = await fetch( apiUrl, {
+
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
